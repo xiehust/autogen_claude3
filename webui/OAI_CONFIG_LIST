@@ -1,0 +1,14 @@
+[
+    {
+        "model": "claude-3-sonnet",
+        "base_url": "http://0.0.0.0:4000/",
+        "api_type": "open_ai",
+        "api_key": "NULL"
+    },
+    {
+        "model": "claude-3-haiku",
+        "base_url": "http://0.0.0.0:4000/",
+        "api_type": "open_ai",
+        "api_key": "NULL"
+    }
+]
