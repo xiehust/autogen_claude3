@@ -3,6 +3,8 @@ import autogen
 import asyncio
 from typing import Any, Callable, Dict, List, Optional, Tuple, Type, Union
 from autogen import UserProxyAgent,AssistantAgent,GroupChatManager,GroupChat
+from autogen.agentchat.contrib.math_user_proxy_agent import MathUserProxyAgent
+
 import random 
 import os
 import shutil
@@ -39,6 +41,7 @@ def setup_assistant_agents(st_session,llm_config):
     # create an AssistantAgent named "assistant"
     assistant = AssistantAgent(
         name="assistant",
+        system_message="You are a helpful assistant.",
         llm_config=llm_config,
         
     )
@@ -49,14 +52,14 @@ def setup_assistant_agents(st_session,llm_config):
         config={"session_messages": st_session,"avatar":"🧑‍🎓"},#https://emojicopy.com/
     )
     # create a UserProxyAgent instance named "user_proxy"
-    user_proxy = UserProxyAgent(
-        name="user_proxy",
+    user_proxy = MathUserProxyAgent(
+        name="mathproxyagent",
         llm_config=llm_config,
         human_input_mode="NEVER",
-        max_consecutive_auto_reply=10,
-        is_termination_msg=lambda x: x.get("content", "").rstrip().endswith("TERMINATE"),
+        # max_consecutive_auto_reply=10,
+        # is_termination_msg=lambda x: x.get("content", "").rstrip().endswith("TERMINATE"),
         code_execution_config={
-            "last_n_messages": 1, 
+            # "last_n_messages": 3, 
             "work_dir": ".coding",
             "use_docker": True,  # set to True or image name like "python:3" to use docker
         },
@@ -74,13 +77,13 @@ def setup_assistant_agents(st_session,llm_config):
 models = {
     "claude-3-sonnet":"claude-3-sonnet",
     "gpt-4-1106-preview":"gpt-4-1106-preview",
-     "gpt-3.5-turbo-16k":"gpt-3.5-turbo-16k"
-    
+    "gpt-4-turbo-2024-04-09":"gpt-4-turbo-2024-04-09",
+    "gpt-3.5-turbo-16k":"gpt-3.5-turbo-16k"
 }
 
 async def main():
     global SEED
-    st.title("💬 Two Users")
+    st.title("💬 Math Agent")
     user_proxy = None
     assistant = None
     with st.sidebar:
@@ -122,7 +125,8 @@ async def main():
             input_text = st.session_state.messages[-1]
             user_proxy.initiate_chat(
                     assistant,
-                    message=input_text['content'])
+                    message=user_proxy.message_generator,
+                    problem = input_text['content'])
 
 
 if __name__ == "__main__":
