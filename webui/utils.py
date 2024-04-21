@@ -35,8 +35,9 @@ def _write_to_st(session_messages,role,text,avatar=None):
 def print_messages(recipient, messages, sender, config):
     session_messages = config['session_messages']
     avatar = config['avatar']
-    print(f"Messages from: {sender.name} sent to: {recipient.name} | num messages: {len(messages)} | message: {messages[-1]['content']}")
-    _write_to_st(session_messages,sender.name,messages[-1]['content'],avatar)
+    log = f"{sender.name} ==> {recipient.name}"
+    print(log)
+    _write_to_st(session_messages,sender.name,log+"\n\n"+messages[-1]['content'],avatar)
     return False, None 
 
 def print_formatted_messages(recipient, messages, sender, config):

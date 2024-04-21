@@ -72,6 +72,7 @@ def setup_assistant_agents(st_session,llm_config):
 
 
 models = {
+            "claude-3-haiku":"claude-3-haiku",
     "claude-3-sonnet":"claude-3-sonnet",
     "gpt-4-1106-preview":"gpt-4-1106-preview",
      "gpt-3.5-turbo-16k":"gpt-3.5-turbo-16k"

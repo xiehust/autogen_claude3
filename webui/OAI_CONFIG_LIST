@@ -10,5 +10,20 @@
         "base_url": "http://0.0.0.0:4000/",
         "api_type": "open_ai",
         "api_key": "NULL"
+    },
+    {
+        "model": "gpt-4-turbo-2024-04-09",
+        "api_type": "open_ai",
+        "api_key": "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"
+    },
+    {
+        "model": "gpt-4-1106-preview",
+        "api_type": "open_ai",
+        "api_key": "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"
+    },
+    {
+        "model": "gpt-3.5-turbo-16k",
+        "api_type": "open_ai",
+        "api_key": "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"
     }
 ]

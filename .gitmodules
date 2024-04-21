@@ -1,0 +1,3 @@
+[submodule "litellm/litellm"]
+	path = litellm/litellm
+	url = git@github.com:xiehust/litellm.git
